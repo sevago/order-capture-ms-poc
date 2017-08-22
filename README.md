@@ -7,5 +7,5 @@ Run add-dependencies-script.cmd script
 Build Maven project
 Start Spring Boot app
 ```
-# Usage
-Vist `http://localhost:8080/api/product/{customerId}?asyncMode=true`
+# Usage and API Documentation:
+Vist `https://documenter.getpostman.com/view/872453/oms-microservices-poc/6n1ZFg4`
