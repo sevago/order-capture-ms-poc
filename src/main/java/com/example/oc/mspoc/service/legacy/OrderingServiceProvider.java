@@ -6,6 +6,8 @@ import amdocs.oms.connector.Log;
 
 public interface OrderingServiceProvider {
 	
+	void initialize();
+	
 	ServiceOutputWrapper invoke(String id);
 	
 	void logObject(Log clientLog, Object objectToLog);

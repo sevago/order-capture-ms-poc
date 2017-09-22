@@ -25,7 +25,8 @@ import com.example.oc.mspoc.controller.OrderCaptureRestController;
 import com.example.oc.mspoc.listener.AssignedProductMessageListener;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = JmxAutoConfiguration.class)
+//@EnableAutoConfiguration(exclude = JmxAutoConfiguration.class)
+@EnableAutoConfiguration
 public class OrderCaptureMsPocApplication {
 	
 	public final static String OC_AP_MESSAGE_QUEUE = "oc-ap-message-queue";

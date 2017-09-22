@@ -18,5 +18,4 @@ public class RetrieveOrderSummaryOutputWrapper implements ServiceOutputWrapper {
 	public void setOutput(Object orderSummaryOutput) {
 		this.orderSummaryOutput = (RetrieveOrderSummaryOutput) orderSummaryOutput;
 	}
-
 }

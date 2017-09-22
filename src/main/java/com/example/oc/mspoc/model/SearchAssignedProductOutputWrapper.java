@@ -17,5 +17,4 @@ public class SearchAssignedProductOutputWrapper implements ServiceOutputWrapper 
 	public void setOutput(Object searchAssignedProductOutput) {
 		this.searchAssignedProductOutput = (SearchAssignedProductOutput) searchAssignedProductOutput;
 	}
-
 }

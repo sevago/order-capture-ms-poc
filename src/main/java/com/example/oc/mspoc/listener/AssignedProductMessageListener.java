@@ -20,8 +20,6 @@ public class AssignedProductMessageListener {
 	public void setAssignedProductService(AssignedProductService assignedProductService) { this.assignedProductService = assignedProductService; }
 
     public void receiveMessage(Map<String, String> message) {
-        log.debug("Received {} message", message);
         assignedProductService.searchAssignedProduct(message.get("id"), false);
-        log.debug("Message {} processed", message);
     }
 }
