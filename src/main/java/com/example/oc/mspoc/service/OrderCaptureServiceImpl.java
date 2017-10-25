@@ -47,7 +47,6 @@ public abstract class OrderCaptureServiceImpl implements OrderCaptureService {
 	public JsonNode handleServiceCall(String id, boolean mode) {
 		JsonNode json = findInstanceInRepository(id);
 		if (json == null) {
-		    //CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(() -> serviceProvider.invoke(id))
 			CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(() -> serviceProvider.invoke(id))
 				.thenApply(this::handleServiceResponse)
 				.thenAccept(newInstance -> addInstanceToRepository(id, newInstance))
