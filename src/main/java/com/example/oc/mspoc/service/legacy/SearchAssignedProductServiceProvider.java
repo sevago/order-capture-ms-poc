@@ -21,7 +21,7 @@ import com.amdocs.cih.exception.InvalidUsageException;
 import com.amdocs.cih.services.assignedproduct.lib.SearchAssignedProductOutput;
 import com.amdocs.cih.services.oms.interfaces.IOmsServicesRemote;
 import com.amdocs.cih.services.oms.lib.SelectionCriteria;
-import com.example.oc.mspoc.model.SearchAssignedProductOutputWrapper;
+import com.example.oc.mspoc.datatype.SearchAssignedProductOutputWrapper;
 
 import amdocs.oms.connector.Log;
 import amdocs.oms.connector.Message;

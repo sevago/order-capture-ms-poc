@@ -1,9 +1,7 @@
-package com.example.oc.mspoc.model;
+package com.example.oc.mspoc.datatype;
 
 public interface ServiceOutputWrapper {
 
 	Object getOutput();
-	
-	void setOutput(Object obj); 
 	
 }

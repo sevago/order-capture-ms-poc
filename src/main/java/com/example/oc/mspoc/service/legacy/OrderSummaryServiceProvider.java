@@ -18,7 +18,7 @@ import com.amdocs.cih.services.order.lib.OrderID;
 import com.amdocs.cih.services.order.lib.OrderRef;
 import com.amdocs.cih.services.order.lib.RetrieveOrderSummaryInput;
 import com.amdocs.cih.services.order.lib.RetrieveOrderSummaryOutput;
-import com.example.oc.mspoc.model.RetrieveOrderSummaryOutputWrapper;
+import com.example.oc.mspoc.datatype.RetrieveOrderSummaryOutputWrapper;
 import com.example.oc.mspoc.service.legacy.OrderingServiceProvider;
 
 import amdocs.oms.connector.Log;
@@ -34,10 +34,10 @@ public class OrderSummaryServiceProvider implements OrderingServiceProvider {
 	@Value("${app.oms.uams.password}")
 	private String uamsPassword;
 	
-	@Value("${app.oms.host}")
+	@Value("${app.oms.pt61.host}")
 	private String omsHost;
 	
-	@Value("${app.oms.port}")
+	@Value("${app.oms.pt61.port}")
 	private String omsPort;
 	
 	private static OmsServiceInvoker ejbService = null;
@@ -72,7 +72,7 @@ public class OrderSummaryServiceProvider implements OrderingServiceProvider {
 			RetrieveOrderSummaryInput obj = new RetrieveOrderSummaryInput();
 			
 			amdocs.oms.connector.Log clientLog = Log.getLog(this.getClass().getName());
-			clientLog.initLog(fname, encoding, 3);
+			Log.initLog(fname, encoding, 3);
 			//serialVersionUID, Locked, JDK_VERSION
 			clientLog.logMessage(1, Message.START, "START Logging");
 			

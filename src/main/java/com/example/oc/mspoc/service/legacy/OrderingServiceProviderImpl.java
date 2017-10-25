@@ -14,20 +14,23 @@ import amdocs.oms.connector.SerializedObjectLogger;
 public abstract class OrderingServiceProviderImpl implements OrderingServiceProvider {
 	
 	@Value("${app.oms.uams.user}")
-	protected static String uamsUser;
+	private String uamsUser;
 	
 	@Value("${app.oms.uams.password}")
-	protected static String uamsPassword;
+	private String uamsPassword;
 	
-	@Value("${app.oms.host}")
-	protected static String omsHost;
+	@Value("${app.oms.pt61.host}")
+	private String omsHost;
 	
-	@Value("${app.oms.port}")
-	protected static String omsPort;
+	@Value("${app.oms.pt61.port}")
+	private String omsPort;
 	
-	protected OmsServiceInvoker ejbService = null;
-	protected IOmsServicesRemote iOmsServicesRemote = null;
-	protected OrderingContext ctx = null;
+	@Value("${app.oms.api.log.directory}")
+	protected String omsApiLogDirectory;
+	
+	protected OmsServiceInvoker ejbService;
+	protected IOmsServicesRemote iOmsServicesRemote;
+	protected OrderingContext ctx;
 	
 	protected final static String encoding = "UTF-8";
 	

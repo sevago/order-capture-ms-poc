@@ -16,7 +16,9 @@ import com.amdocs.cih.services.orderingactivities.lib.RetrieveCatalogProductForC
 import com.amdocs.cih.services.orderingactivities.lib.RetrieveCatalogProductForConfigurationOutput;
 import com.amdocs.cih.services.orderingproductcatalog.lib.OrderingCatalogOffer;
 import com.amdocs.cih.services.orderingproductcatalog.lib.OrderingCatalogOfferID;
-import com.example.oc.mspoc.model.RetrieveCatalogDataOutputWrapper;
+import com.example.oc.mspoc.datatype.EmptyOutputWrapper;
+import com.example.oc.mspoc.datatype.RetrieveCatalogDataOutputWrapper;
+import com.example.oc.mspoc.datatype.ServiceOutputWrapper;
 
 import amdocs.oms.connector.Log;
 import amdocs.oms.connector.Message;
@@ -27,11 +29,12 @@ public class RetrieveCatalogDataServiceProvider extends OrderingServiceProviderI
 	private final static String HIGH_SPEED_OFFER_CID = "50580";
 	private final static String OPTIK_TV_OFFER_CID = "21175459";
 	private final static String PIK_TV_OFFER_CID = "40937304";
-	private final static String CUSTOMER_ID = "10017899";
+	private final static String CUSTOMER_ID = "95123865";
 	
-	private String fname = "C:\\oms\\omstests\\log\\" + this.getClass().getName() + "_" + System.currentTimeMillis()+ ".log";
+	//private String fname = omsApiLogDirectory + this.getClass().getName() + "_" + System.currentTimeMillis() + ".log";
+	private String fname = "C:\\workspace\\soc9\\logs\\RetrieveCatalogData_" + System.currentTimeMillis() + ".log";
 	
-	public RetrieveCatalogDataOutputWrapper invoke(String offerId) {
+	public ServiceOutputWrapper invoke(String offerId) {
 		
 		if (ejbService == null) initialize();
 		
@@ -39,8 +42,41 @@ public class RetrieveCatalogDataServiceProvider extends OrderingServiceProviderI
 		Log.initLog(fname, encoding, 3);
 		clientLog.logMessage(1, Message.START, "START Logging");
 		
-		RetrieveCatalogProductForConfigurationInput  input = new RetrieveCatalogProductForConfigurationInput();
+		RetrieveCatalogProductForConfigurationInput  input = buildInputParameter(offerId);		
+		ServiceOutputWrapper outputWrapper = makeRemoteProcedureCall(input);
 		
+		clientLog.logMessage(1, Message.STAY, "Result of retrieveCatalogProductForConfiguration");
+	    logObject(clientLog, outputWrapper.getOutput());    
+	    clientLog.logMessage(1, Message.STOP, "End Logging");
+	    System.out.println("Finsihed");
+	    clientLog.flush();
+	    
+	    return outputWrapper;
+	}
+	
+	private ServiceOutputWrapper makeRemoteProcedureCall(RetrieveCatalogProductForConfigurationInput input) {
+		RetrieveCatalogProductForConfigurationOutput output = new RetrieveCatalogProductForConfigurationOutput();
+		try {
+			output = iOmsServicesRemote.retrieveCatalogProductForConfiguration(new ApplicationContext(), ctx, input, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new EmptyOutputWrapper();
+		}
+		return new RetrieveCatalogDataOutputWrapper(output); 
+	}
+
+	private RetrieveCatalogProductForConfigurationInput buildInputParameter(String offerId) {
+		RetrieveCatalogProductForConfigurationInput  input = new RetrieveCatalogProductForConfigurationInput();
+		CustomerProfile customerProfile = populateCustomerProfile();
+		ImplementedOffer implementedOffer = populateImplementedOffer(offerId);		
+		input.setCatalogProducts(new ImplementedOffer[1]);
+		input.setCatalogProducts(0, implementedOffer);
+		input.setCustomerProfile(customerProfile);
+		input.setQuotationRequired(false);
+		return input;
+	}
+	
+	private CustomerProfile populateCustomerProfile() {
 		String customerID = CUSTOMER_ID;
 		CustomerProfileRef customer = new CustomerProfileRef();
 		CustomerProfileID custProfileID = new CustomerProfileID();
@@ -49,38 +85,20 @@ public class RetrieveCatalogDataServiceProvider extends OrderingServiceProviderI
 		customer.setCustomerProfileID(custProfileID );		
 		CustomerProfile customerProfile = new CustomerProfile();
 		customerProfile.setCustomerProfileRef(customer);
-		
-		String offId = PIK_TV_OFFER_CID;
+		return customerProfile;
+	}
+
+	private ImplementedOffer populateImplementedOffer(String offerId) {
 		OrderingCatalogOfferID orderingCatalogOfferID = new OrderingCatalogOfferID();
-		orderingCatalogOfferID.setCatalogOfferID(offId);
-		EntityIDBaseAssist.setOMSMasterId(orderingCatalogOfferID, offId);
+		orderingCatalogOfferID.setCatalogOfferID(offerId);
+		EntityIDBaseAssist.setOMSMasterId(orderingCatalogOfferID, offerId);
 		OrderingCatalogOffer orderingCatalogOffer = new OrderingCatalogOffer();
 		orderingCatalogOffer.setCatalogOfferID(orderingCatalogOfferID);
 		AvailableOffer availableOffer = new AvailableOffer();
 		availableOffer.setCatalogOffer(orderingCatalogOffer);
 		ImplementedOffer implementedOffer = new ImplementedOffer();
 		implementedOffer.setAvailableOffer(availableOffer);
-		
-		input.setCatalogProducts(new ImplementedOffer[1]);
-		input.setCatalogProducts(0, implementedOffer);
-		input.setCustomerProfile(customerProfile);
-		input.setQuotationRequired(false);
-		
-		RetrieveCatalogProductForConfigurationOutput output = null;
-		
-		try {
-			output = iOmsServicesRemote.retrieveCatalogProductForConfiguration(new ApplicationContext(), ctx, input, null);
-		} catch (InvalidUsageException | RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		clientLog.logMessage(1, Message.STAY, "Result of retrieveCatalogProductForConfiguration");
-	    logObject(clientLog, output);		    
-	    clientLog.logMessage(1, Message.STOP, "End Logging");
-	    System.out.println("Finsihed");
-	    clientLog.flush();
-	    
-	    return new RetrieveCatalogDataOutputWrapper(output);
+		return implementedOffer;
 	}
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.amdocs.cih.services.order.lib.RetrieveOrderSummaryOutput;
 import com.example.oc.mspoc.OrderCaptureMsPocApplication;
-import com.example.oc.mspoc.model.ServiceOutputWrapper;
+import com.example.oc.mspoc.datatype.ServiceOutputWrapper;
 import com.example.oc.mspoc.service.legacy.OrderSummaryServiceProvider;
 
 @Service

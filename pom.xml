@@ -73,7 +73,12 @@
 			<groupId>com.weblogic</groupId>
 			<artifactId>wlfullclient</artifactId>
 			<version>12.1</version>
-		</dependency-->	
+		</dependency-->
+		<dependency>
+			<groupId>com.weblogic</groupId>
+			<artifactId>wlthint3client</artifactId>
+			<version>12.1</version>
+		</dependency>	
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>AmdocsOrderingCihDataTypes</artifactId>

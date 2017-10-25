@@ -18,5 +18,20 @@
     "name": "app.oms.port",
     "type": "java.lang.String",
     "description": "A description for 'app.oms.port'"
+  },
+  {
+    "name": "app.oms.pt61.host",
+    "type": "java.lang.String",
+    "description": "A description for 'app.oms.pt61.host'"
+  },
+  {
+    "name": "app.oms.pt61.port",
+    "type": "java.lang.String",
+    "description": "A description for 'app.oms.pt61.port'"
+  },
+  {
+    "name": "app.oms.api.log.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'app.oms.api.log.directory'"
   }
 ]}

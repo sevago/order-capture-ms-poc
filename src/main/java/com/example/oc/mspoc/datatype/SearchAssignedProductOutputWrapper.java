@@ -1,4 +1,4 @@
-package com.example.oc.mspoc.model;
+package com.example.oc.mspoc.datatype;
 
 import com.amdocs.cih.services.assignedproduct.lib.SearchAssignedProductOutput;
 
@@ -12,9 +12,5 @@ public class SearchAssignedProductOutputWrapper implements ServiceOutputWrapper 
 
 	public Object getOutput() {
 		return searchAssignedProductOutput;
-	}
-
-	public void setOutput(Object searchAssignedProductOutput) {
-		this.searchAssignedProductOutput = (SearchAssignedProductOutput) searchAssignedProductOutput;
 	}
 }

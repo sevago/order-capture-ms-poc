@@ -1620,8 +1620,7 @@ public class OmsServiceInvoker {
 
 	private InitialContext getinitialContext() throws NamingException {
 		Hashtable<String, String> env = new Hashtable<String, String>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY,
-				"weblogic.jndi.WLInitialContextFactory");
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "weblogic.jndi.WLInitialContextFactory");
 		env.put(Context.PROVIDER_URL,"t3://" + omsHost +":" + omsPort);
 		env.put(Context.SECURITY_CREDENTIALS, tkt);
 		env.put(Context.SECURITY_PRINCIPAL, tkt);

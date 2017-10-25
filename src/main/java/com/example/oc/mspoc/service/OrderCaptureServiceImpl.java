@@ -11,7 +11,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.oc.mspoc.model.ServiceOutputWrapper;
 import com.example.oc.mspoc.repository.OrderCaptureRepository;
 import com.example.oc.mspoc.service.legacy.OrderingServiceProvider;
 import com.example.oc.mspoc.util.JsonUtil;
@@ -22,10 +21,8 @@ public abstract class OrderCaptureServiceImpl implements OrderCaptureService {
 	
 	private static final Logger log = LoggerFactory.getLogger(OrderCaptureServiceImpl.class);
 	
-	protected OrderCaptureRepository repository;
-	
+	protected OrderCaptureRepository repository;	
 	protected OrderingServiceProvider serviceProvider;
-	
 	private RabbitTemplate rabbitTemplate;
 	
 	@Autowired
@@ -50,10 +47,15 @@ public abstract class OrderCaptureServiceImpl implements OrderCaptureService {
 	public JsonNode handleServiceCall(String id, boolean mode) {
 		JsonNode json = findInstanceInRepository(id);
 		if (json == null) {
-			CompletableFuture<?> completableFuture = CompletableFuture.supplyAsync(() -> serviceProvider.invoke(id))
-					.thenApply((ServiceOutputWrapper outputWrapper) -> { return handleServiceResponse(outputWrapper); })
-					.thenAccept((Object newInstance) -> { if (newInstance != null) addInstanceToRepository(id, newInstance); });		
-			
+		    //CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(() -> serviceProvider.invoke(id))
+			CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(() -> serviceProvider.invoke(id))
+				.thenApply(this::handleServiceResponse)
+				.thenAccept(newInstance -> addInstanceToRepository(id, newInstance))
+				.exceptionally(error -> {
+					error.printStackTrace();
+			        return null;
+				});
+
 			if (!mode) {
 				try {
 					completableFuture.get();
@@ -66,7 +68,7 @@ public abstract class OrderCaptureServiceImpl implements OrderCaptureService {
 		
 		return json != null ? json : JsonUtil.objectToJson(NOT_FOUND_MESSAGE);
 	}
-	
+
 	@Override
     public void sendMessage(String id, String queueName) {
         Map<String, String> actionmap = new HashMap<>();

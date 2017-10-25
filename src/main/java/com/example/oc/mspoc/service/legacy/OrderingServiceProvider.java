@@ -1,6 +1,6 @@
 package com.example.oc.mspoc.service.legacy;
 
-import com.example.oc.mspoc.model.ServiceOutputWrapper;
+import com.example.oc.mspoc.datatype.ServiceOutputWrapper;
 
 import amdocs.oms.connector.Log;
 

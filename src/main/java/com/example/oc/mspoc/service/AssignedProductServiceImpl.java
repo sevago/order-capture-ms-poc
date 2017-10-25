@@ -10,7 +10,7 @@ import com.amdocs.cih.services.assignedproduct.lib.AssignedProductHeader;
 import com.amdocs.cih.services.assignedproduct.lib.SearchAssignedProductHierarchy;
 import com.amdocs.cih.services.assignedproduct.lib.SearchAssignedProductOutput;
 import com.example.oc.mspoc.OrderCaptureMsPocApplication;
-import com.example.oc.mspoc.model.ServiceOutputWrapper;
+import com.example.oc.mspoc.datatype.ServiceOutputWrapper;
 import com.example.oc.mspoc.service.legacy.SearchAssignedProductServiceProvider;
 import com.fasterxml.jackson.databind.JsonNode;
 

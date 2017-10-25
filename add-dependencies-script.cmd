@@ -6,4 +6,4 @@ call mvn install:install-file -Dfile="C:/OMS9/bb/cord9lib/v91_00/amdocs/AmdocsCo
 call mvn install:install-file -Dfile="C:/OMS9/bb/cord9lib/v91_00/amdocs/APM/AmdocsProcMgrBase.jar" -DgroupId="com.example" -DartifactId="AmdocsProcMgrBase" -Dversion="1.0" -Dpackaging="jar"
 call mvn install:install-file -Dfile="C:/OMS9/bb/cord9lib/v91_00/amdocs/Ordering/ofc.jar" -DgroupId="com.example" -DartifactId="ofc" -Dversion="1.0" -Dpackaging="jar"
 call mvn install:install-file -Dfile="C:/OMS9/bb/cord9lib/v91_00/amdocs/uams/uams.jar" -DgroupId="com.example" -DartifactId="uams" -Dversion="1.0" -Dpackaging="jar"
-call mvn install:install-file -Dfile="%BEA_HOME%/wlserver_12.1/server/lib/wlfullclient.jar" -DgroupId="com.weblogic" -DartifactId="wlfullclient" -Dversion="12.1" -Dpackaging="jar"
+call mvn install:install-file -Dfile="%BEA_HOME%/wlserver_12.1/server/lib/wlthint3client.jar" -DgroupId="com.weblogic" -DartifactId="wlthint3client" -Dversion="12.1" -Dpackaging="jar"

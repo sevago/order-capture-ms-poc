@@ -1,4 +1,4 @@
-package com.example.oc.mspoc.model;
+package com.example.oc.mspoc.datatype;
 
 public class OrderSummary {
 	

@@ -1,4 +1,4 @@
-package com.example.oc.mspoc.model;
+package com.example.oc.mspoc.datatype;
 
 import com.amdocs.cih.services.order.lib.RetrieveOrderSummaryOutput;
 
@@ -13,9 +13,5 @@ public class RetrieveOrderSummaryOutputWrapper implements ServiceOutputWrapper {
 
 	public Object getOutput() {
 		return orderSummaryOutput;
-	}
-
-	public void setOutput(Object orderSummaryOutput) {
-		this.orderSummaryOutput = (RetrieveOrderSummaryOutput) orderSummaryOutput;
 	}
 }
